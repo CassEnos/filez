@@ -1,15 +1,16 @@
-DROP TABLE IF EXISTS folders CASCADE;
 DROP TABLE IF EXISTS files;
+DROP TABLE IF EXISTS folders;
 
+CREATE DATABASE filez;
+\c filez;
 CREATE TABLE folders (
-  id SERIAL PRIMARY KEY,
-  name TEXT UNIQUE NOT NULL
+  id serial PRIMARY KEY,
+  name text UNIQUE NOT NULL 
 );
-
-create table files (
-  id SERIAL PRIMARY KEY,
+CREATE TABLE files (
+  id serial PRIMARY KEY,
   name text NOT NULL,
-  size integer NOT NULL,
-  folder_id integer NOT NULL REFERENCES folders(id) ON DELETE CASCADE,
+  size int NOT NULL,
+  folder_id int NOT NULL REFERENCES folders(id) ON DELETE CASCADE,
   UNIQUE (name, folder_id)
 );
